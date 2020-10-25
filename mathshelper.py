@@ -130,17 +130,63 @@ def quadratic_inequality():
         input("\n Press [Enter] to return to the main menu...")
         return
 
+def primefactorise():
+    print("\n\nPrime factor finder")
+    primefactors = []
+    divisor = 2
+    givenint = intput("Enter a number you want to find the prime numbers of: ")
+    currentint = givenint
+    if givenint <= 1:
+        print("The number needs to be 2 or above since the smallest prime number is 2")
+    else:
+        if givenint >= 33554432:
+            #Don’t leave the user hanging
+            print("The number you've given is rather large and may take a while to find factors for.")
+            confirm = input("Do you want to continue [Y/n]: ")
+            if confirm.lower() == "y" or confirm == "":
+                pass
+            else:
+                return
+        biggestprime = givenint / 2
+        while divisor <= biggestprime:
+            if currentint % divisor == 0: #If currentint is a multiple of divisor
+                primefactors.append(divisor)
+                currentint /= divisor
+            else:
+                divisor += 1
+    if len(primefactors) == 0:
+        print("{} is prime".format(givenint))
+    else:
+        #Find the duplicates and neatly put them to the power
+        uniquefactors = []
+        for factor in primefactors:
+            if uniquefactors.count(factor) == 0:
+                uniquefactors.append(factor)
+        
+        print("The factors of {} are:".format(givenint))
+        
+        for factor in uniquefactors:
+            power =  primefactors.count(factor)
+            if power == 1:
+                print("\t{}".format(factor))
+            else:
+                print("\t{}^{}".format(factor, power))
+    input("\n Press [Enter] to return to the main menu...")
+    return
 
 while not quitting:
     print("\n"*2)
     print("Select an option:\n")
     print("1) Quadratic equation solver")
     print("2) Quadratic inequality solver")
+    print("3) Prime factor finder")
     print("q) Quit")
     option = input("\n\nPick an option: ")
     if option == "1":
         quadratic()
     if option == "2":
         quadratic_inequality()
+    if option == "3":
+        primefactorise()
     if option == "q":
         quit()
