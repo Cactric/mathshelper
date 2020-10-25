@@ -1,5 +1,5 @@
 # mathshelper
-Simple python script to help solve some maths
+Simple python script to help solve some maths, mainly things that can't so easily be done with just a spreadsheet or a normal/scientific calculator app
 
 Current features include:
 * A quadratic equation and inequality solver
