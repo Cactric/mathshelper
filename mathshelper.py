@@ -190,7 +190,7 @@ def binomial_natural():
     r_col_length = len(str(r_end)) + 1
     if r_col_length < 4:
         r_col_length = 4
-    print("For n = {}\n    r{} | nCr".format(n, " "*(r_col_length-4)))
+    print("\n\nFor n = {}\n    r{} | nCr".format(n, " "*(r_col_length-4)))
     
     for x in range(r_start, r_stop):
         amount_of_spaces = r_col_length - len(str(x))
@@ -205,19 +205,20 @@ def binomial_rational():
     
     #Variables for calculations in the format nCr
     n = floatput("Give a value for n: ")
-    r_amount = intput("How many coefficients to find? (starting from x^0): ")
+    r_amount = intput("How many coefficients to find? (starting from x^0, n+1 for all): ")
     
     # For the table, the length of the r column will be the length of r_amount + 1
     # At least 4
     r_col_length = len(str(r_amount)) + 1
     if r_col_length < 4:
         r_col_length = 4
-    print("For n = {}\n    r{} | nCr".format(n, " "*(r_col_length-4)))
+    print("\n\nIn form (1 + x)^n")
+    print("Where n = {} (3dp)\n    r{} | nCr".format(round(n,3), " "*(r_col_length-4)))
     
-    for x in range(r_start, r_stop):
+    for x in range(r_amount):
         amount_of_spaces = r_col_length - len(str(x))
-        r_iteration = n
-        for y in range(1, r_amount + 1):
+        r_iteration = 1
+        for y in range(0, x):
             r_iteration *= (n - y)
         r_iteration /= maths.factorial(x)
         print(" " + " "*amount_of_spaces + str(x) + " | {}".format(r_iteration))
