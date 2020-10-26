@@ -4,4 +4,4 @@ Simple python script to help solve some maths, mainly things that can't so easil
 Current features include:
 * A quadratic equation and inequality solver
 * A prime factor finder
-* Ability to generate a table of the coefficients used in a bionomial expansion
+* A binomial coefficient table generator
