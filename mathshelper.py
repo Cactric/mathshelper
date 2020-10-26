@@ -174,12 +174,39 @@ def primefactorise():
     input("\n Press [Enter] to return to the main menu...")
     return
 
+def binomial_natural():
+    print("Binomial Expansion Coefficient table (natural numbers)\n\n")
+    print("Form nCr, where r is a variable in a table, n is typically the power the binomial is raised to")
+    
+    #Variables for calculations in the format nCr
+    n = intput("Give a value for n: ")
+    r_start = intput("Value of r to start at (inclusive, 0 if you want all terms): ")
+    r_end = intput("Value of r to end at (inclusive, equal to n if you want all terms): ")
+    # r_stop is for the loop in Python
+    r_stop = r_end + 1
+    
+    # For the table, the length of the r column will be the length of r_end + 2
+    # At least 4
+    r_col_length = len(str(r_end)) + 1
+    if r_col_length < 4:
+        r_col_length = 4
+    print("For n = {}\n    r{} | nCr".format(n, " "*(r_col_length-4)))
+    
+    for x in range(r_start, r_stop):
+        amount_of_spaces = r_col_length - len(str(x))
+        print(" " + " "*amount_of_spaces + str(x) + " | {}".format(maths.comb(n, x)))
+
+    input("\n Press [Enter] to return to the main menu...")
+    return
+
+#Menu
 while not quitting:
     print("\n"*2)
     print("Select an option:\n")
     print("1) Quadratic equation solver")
     print("2) Quadratic inequality solver")
     print("3) Prime factor finder")
+    print("4) Binomial Expansion Coefficient table (natural numbers)")
     print("q) Quit")
     option = input("\n\nPick an option: ")
     if option == "1":
@@ -188,5 +215,8 @@ while not quitting:
         quadratic_inequality()
     if option == "3":
         primefactorise()
+    if option == "4":
+        binomial_natural()
     if option == "q":
+        quitting = True
         quit()
