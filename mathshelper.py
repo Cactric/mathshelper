@@ -185,7 +185,7 @@ def binomial_natural():
     # r_stop is for the loop in Python
     r_stop = r_end + 1
     
-    # For the table, the length of the r column will be the length of r_end + 2
+    # For the table, the length of the r column will be the length of r_end + 1
     # At least 4
     r_col_length = len(str(r_end)) + 1
     if r_col_length < 4:
@@ -199,6 +199,34 @@ def binomial_natural():
     input("\n Press [Enter] to return to the main menu...")
     return
 
+def binomial_rational():
+    print("Binomial Expansion Coefficient table (all rational numbers)\n\n")
+    print("Form nCr, where r is a variable in a table, n is typically the power the binomial is raised to")
+    
+    #Variables for calculations in the format nCr
+    n = floatput("Give a value for n: ")
+    r_amount = intput("How many coefficients to find? (starting from x^0): ")
+    
+    # For the table, the length of the r column will be the length of r_amount + 1
+    # At least 4
+    r_col_length = len(str(r_amount)) + 1
+    if r_col_length < 4:
+        r_col_length = 4
+    print("For n = {}\n    r{} | nCr".format(n, " "*(r_col_length-4)))
+    
+    for x in range(r_start, r_stop):
+        amount_of_spaces = r_col_length - len(str(x))
+        r_iteration = n
+        for y in range(1, r_amount + 1):
+            r_iteration *= (n - y)
+        r_iteration /= maths.factorial(x)
+        print(" " + " "*amount_of_spaces + str(x) + " | {}".format(r_iteration))
+
+    input("\n Press [Enter] to return to the main menu...")
+    return
+
+
+
 #Menu
 while not quitting:
     print("\n"*2)
@@ -207,6 +235,7 @@ while not quitting:
     print("2) Quadratic inequality solver")
     print("3) Prime factor finder")
     print("4) Binomial Expansion Coefficient table (natural numbers)")
+    print("5) Binomial Expansion Coefficient table (all rational numbers)")
     print("q) Quit")
     option = input("\n\nPick an option: ")
     if option == "1":
@@ -217,6 +246,8 @@ while not quitting:
         primefactorise()
     if option == "4":
         binomial_natural()
+    if option == "5":
+        binomial_rational()
     if option == "q":
         quitting = True
         quit()
