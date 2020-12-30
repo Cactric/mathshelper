@@ -3,5 +3,6 @@ Simple python script to help solve some maths, mainly things that can't so easil
 
 Current features include:
 * A quadratic equation and inequality solver
-* A prime factor finder
+* A prime factor finder for an individual number
 * A binomial coefficient table generator
+* A common prime factor finder for a list of numbers

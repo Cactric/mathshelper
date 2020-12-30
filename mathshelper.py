@@ -6,11 +6,13 @@ print("Welcome to mathshelper.py!")
 
 quitting = False
 
-def intput(Message):
+def intput(Message, EmptyLineAllowed=False):
     while True:
         attempt = input(Message)
         if attempt.isnumeric():
             return int(attempt)
+        elif EmptyLineAllowed and attempt == "":
+            return attempt
         else:
             print("Needs to be an integer, try again")
 
@@ -226,7 +228,70 @@ def binomial_rational():
     input("\n Press [Enter] to return to the main menu...")
     return
 
+def common_primes_finder():
+    print("Common Prime Factors finder")
+    print("To end entering the list of numbers, enter an empty line.")
+    users_numbers = []
+    empty_line = False
+    while not empty_line:
+        this_line = intput("Enter a number, or leave the line blank to stop entering numbers\n> ", EmptyLineAllowed=True)
+        if this_line == "":
+            empty_line = True
+            break
+        else:
+            if this_line < 2: # 2 is the smallest prime
+                print("There will be no primes in common because {} is less than 2, the smallest prime.".format(this_line))
+                input("Press [Enter] to return to the main menu")
+                return
+            users_numbers.append(this_line)
+    print("Numbers to consider: " + str(users_numbers))
+    
+    first_number = True
+    common_primes = []
+    
+    for givenint in users_numbers:
+        primefactors= []
+        divisor = 2
+        currentint = givenint
+        #Find the common factors
+        biggestprime = givenint / 2
+        while divisor <= biggestprime:
+            if currentint % divisor == 0: #If currentint is a multiple of divisor
+                primefactors.append(divisor)
+                currentint /= divisor
+            else:
+                divisor += 1
+        
+        if len(primefactors) == 0:
+            #If givenint is prime, add it to prime factors
+            primefactors.append(givenint)
 
+        if first_number:
+            common_primes.extend(primefactors)
+            first_number = False
+        else:
+            for prime in common_primes:
+                if primefactors.count(prime) == 0:
+                    # The prime isn't common so we remove it
+                    common_primes.remove(prime)
+                    #primefactors.remove(prime)
+                else:
+                    #If it's common, we remove it from primefactors so that duplicates are counted properly
+                    primefactors.remove(prime)
+            if len(common_primes) == 0:
+                #No common primes
+                print("There weren't any common primes in that list of numbers.")
+                input("Press [Enter] to return to the main menu.")
+                return
+    
+    #Done with finding the common primes now, if there were any
+    print("The common primes of those numbers were:")
+    for primeindex in range(len(common_primes) - 1):
+        print("{}, ".format(common_primes[primeindex]),end="")
+    print("and {}.".format(common_primes[-1]))
+    
+    input("\n\nPress [Enter] to return to the main menu.")
+    return
 
 #Menu
 while not quitting:
@@ -237,6 +302,7 @@ while not quitting:
     print("3) Prime factor finder")
     print("4) Binomial Expansion Coefficient table (natural numbers)")
     print("5) Binomial Expansion Coefficient table (all rational numbers)")
+    print("6) Common Prime Factors finder (from a list of numbers)")
     print("q) Quit")
     option = input("\n\nPick an option: ")
     if option == "1":
@@ -249,6 +315,8 @@ while not quitting:
         binomial_natural()
     if option == "5":
         binomial_rational()
+    if option == "6":
+        common_primes_finder()
     if option == "q":
         quitting = True
         quit()
