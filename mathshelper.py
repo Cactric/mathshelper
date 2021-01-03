@@ -172,7 +172,7 @@ def primefactorise():
             if power == 1:
                 print("\t{}".format(factor))
             else:
-                print("\t{}^{}".format(factor, power))
+                print("\t{}^{}\t\t({})".format(factor, power, factor ** power))
     input("\n Press [Enter] to return to the main menu...")
     return
 
@@ -285,10 +285,25 @@ def common_primes_finder():
                 return
     
     #Done with finding the common primes now, if there were any
+    #To do: deduplicate and raise things to powers
     print("The common primes of those numbers were:")
-    for primeindex in range(len(common_primes) - 1):
-        print("{}, ".format(common_primes[primeindex]),end="")
-    print("and {}.".format(common_primes[-1]))
+    #for primeindex in range(len(common_primes) - 1):
+        #print("{}, ".format(common_primes[primeindex]),end="")
+    #print("and {}.".format(common_primes[-1]))
+
+    #Find the duplicates and neatly put them to the power
+    uniquefactors = []
+    for factor in common_primes:
+        if uniquefactors.count(factor) == 0:
+            uniquefactors.append(factor)
+    
+    for factor in uniquefactors:
+        power =  common_primes.count(factor)
+        if power == 1:
+            print("\t{}".format(factor))
+        else:
+            print("\t{}^{}\t\t({})".format(factor, power, factor ** power))
+
     
     input("\n\nPress [Enter] to return to the main menu.")
     return
