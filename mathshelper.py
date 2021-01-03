@@ -285,11 +285,7 @@ def common_primes_finder():
                 return
     
     #Done with finding the common primes now, if there were any
-    #To do: deduplicate and raise things to powers
     print("The common primes of those numbers were:")
-    #for primeindex in range(len(common_primes) - 1):
-        #print("{}, ".format(common_primes[primeindex]),end="")
-    #print("and {}.".format(common_primes[-1]))
 
     #Find the duplicates and neatly put them to the power
     uniquefactors = []
