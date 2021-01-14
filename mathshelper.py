@@ -1,10 +1,13 @@
 #!/usr/bin/python
 
 import math as maths
+import history
 
 print("Welcome to mathshelper.py!")
 
 quitting = False
+ValueHistory = history.History()
+ValueHistory.load()
 
 def intput(Message, EmptyLineAllowed=False):
     while True:
@@ -44,8 +47,11 @@ def quadratic():
             root2 = (-b - maths.sqrt(discrim)) / (2*a)
             if root1 == root2:
                 print("\n1 root: x = " + str(root1))
+                ValueHistory.push(root1)
             else:
                 print("\n2 roots:\n    x = " + str(root1) + "\nand x = " + str(root2))
+                ValueHistory.push(root1)
+                ValueHistory.push(root2)
         input("\n Press [Enter] to return to the main menu...")
         return
 
@@ -314,7 +320,8 @@ while not quitting:
     print("4) Binomial Expansion Coefficient table (natural numbers)")
     print("5) Binomial Expansion Coefficient table (all rational numbers)")
     print("6) Common Prime Factors finder (from a list of numbers)")
-    print("q) Quit")
+    print() #end="\n" so this prints a newline
+    print("h) View History \t q) Quit")
     option = input("\n\nPick an option: ")
     if option == "1":
         quadratic()
@@ -328,6 +335,9 @@ while not quitting:
         binomial_rational()
     if option == "6":
         common_primes_finder()
+    if option == "h":
+        ValueHistory.view()
     if option == "q":
         quitting = True
+        ValueHistory.save()
         quit()
